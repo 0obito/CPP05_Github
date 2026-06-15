@@ -15,17 +15,12 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
     std::cout << "bureaucrat with name: " << _name << " and with grade " << _grade << " was created." << std::endl;
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat &other) {
-    // assigning the name here should fail, i think
-    // this->_name = other.getName();
-    this->_grade = other.getGrade();
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(other._grade) {
 }
 
-Bureaucrat& Bureaucrat::operator=(Bureaucrat &other) {
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other) {
     if (this != &other) {
-        // assigning the name here should fail as well, i think
-        // this->_name = other.getName();
-        this->_grade = other.getGrade();
+        this->_grade = other._grade;
     }
     return (*this);
 }
@@ -34,11 +29,11 @@ Bureaucrat::~Bureaucrat() {
     ;
 }
 
-const std::string& Bureaucrat::getName(void) {
+const std::string& Bureaucrat::getName(void) const {
     return _name;
 }
 
-int Bureaucrat::getGrade(void) {
+int Bureaucrat::getGrade(void) const {
     return _grade;
 }
 
