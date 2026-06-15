@@ -3,12 +3,11 @@ COMPILER = c++
 FLAGS    = -Wall -Wextra -Werror -std=c++98
 
 # Server
-NAME  = 
-SRC   = $(SRC_dir)Channel.cpp $(SRC_dir)Client.cpp $(SRC_dir)Dispatcher.cpp \
-        $(SRC_dir)DispatcherUtils.cpp $(SRC_dir)Parser.cpp $(SRC_dir)Server.cpp \
-        $(SRC_dir)Utils.cpp ircServ.cpp
+NAME  = bureaucracy
 
-OBJ   = $(SRC:$(SRC_dir)%.cpp=$(OBJ_dir)%.o)
+SRC     = Bureaucrat.cpp main.cpp
+OBJ     = $(SRC:%.cpp=$(OBJ_dir)%.o)
+OBJ_dir = objs/
 
 # Rules
 all: $(NAME)
@@ -16,7 +15,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(COMPILER) $(FLAGS) $^ -o $(NAME)
 
-$(OBJ_dir)%.o: $(SRC_dir)%.cpp | $(OBJ_dir)
+$(OBJ_dir)%.o: %.cpp | $(OBJ_dir)
 	$(COMPILER) $(FLAGS) -c $< -o $@
 
 $(OBJ_dir):

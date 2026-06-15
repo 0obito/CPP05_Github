@@ -1,19 +1,31 @@
 #include "Bureaucrat.hpp"
 
+Bureaucrat::Bureaucrat() : _name("NPC"), _grade(150) {
+    std::cout << "bureaucrat with default name: " << _name << " and with default grade: " << _grade << " was created." << std::endl;
+}
+
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
-    assignGrade(grade);
-    std::cout << "matalan Bureaucrat: " << _name << " with grade: " << _grade << " was created." << std::endl;
+    if (grade < 1) {
+        throw GradeTooHighException();
+    }
+    if (grade > 150) {
+        throw GradeTooLowException();
+    }
+    _grade = grade;
+    std::cout << "bureaucrat with name: " << _name << " and with grade " << _grade << " was created." << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other) {
-    this->_name = other._name;
-    this->_grade = other._grade;
+Bureaucrat::Bureaucrat(Bureaucrat &other) {
+    // assigning the name here should fail, i think
+    // this->_name = other.getName();
+    this->_grade = other.getGrade();
 }
 
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other) {
-    if (*this != other) {
-        this->_name = other._name;
-        this->_grade = other._name;
+Bureaucrat& Bureaucrat::operator=(Bureaucrat &other) {
+    if (this != &other) {
+        // assigning the name here should fail as well, i think
+        // this->_name = other.getName();
+        this->_grade = other.getGrade();
     }
     return (*this);
 }
@@ -26,20 +38,20 @@ const std::string& Bureaucrat::getName(void) {
     return _name;
 }
 
-const int Bureaucrat::getGrade(void) {
-    const int grade;
-    grade = _grade;
-    return grade;
+int Bureaucrat::getGrade(void) {
+    return _grade;
 }
 
-void Bureaucrat::assignGrade(int grade) {
-    if (grade < 1) {
-        throw GradeTooLowException();
-    }
-    else if (grade > 150) {
+void Bureaucrat::incrementGrade() {
+    if (_grade == 1) {
         throw GradeTooHighException();
     }
-    else {
-        _grade = grade;
+    _grade -= 1;
+}
+
+void Bureaucrat::decrementGrade() {
+    if (_grade == 150) {
+        throw GradeTooLowException();
     }
+    _grade += 1;
 }
