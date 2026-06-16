@@ -1,26 +1,27 @@
-#include <iostream>
-#include <stdexcept>
 #include "Bureaucrat.hpp"
 
 int main() {
 
     try {
-        Bureaucrat  npc1;
-        Bureaucrat  npc2;
-        Bureaucrat  npc3;
-        Bureaucrat  npc4("a", 1500000);
-        Bureaucrat  him1("obito", 1);
-        Bureaucrat  him2("jobito", 2);
-    }
-    catch(const Bureaucrat::GradeTooHighException& tooHigh) {
-        std::cerr << "caught specific exception: " << tooHigh.what() << std::endl;
-    }
-    catch(const Bureaucrat::GradeTooLowException& tooLow) {
-        std::cerr << "caught standard exception: " << tooLow.what() << std::endl;
+        Bureaucrat  mrA("mr A", 150);
+        Bureaucrat  obito("obito", 1);
+        Bureaucrat  jude("jude", 2);
+
+        std::cout << mrA << std::endl;
+        std::cout << obito << std::endl;
+        std::cout << jude << std::endl;
+
+        mrA.incrementGrade();
+        std::cout << mrA << std::endl;
+        mrA.decrementGrade();
+        std::cout << mrA << std::endl;
+        mrA.decrementGrade();
+        std::cout << mrA << std::endl;
     }
     catch(const std::exception& e) {
-        std::cerr << "caught standard exception: " << e.what() << std::endl;
+        std::cerr << "caught exception: " << e.what() << std::endl;
     }
-    std::cout << "End of program." << std::endl;
+
+    std::cout << std::endl << "End of program." << std::endl;
     return (0);
 }
