@@ -13,7 +13,7 @@ class Bureaucrat
 
     public:
         Bureaucrat();
-        Bureaucrat(std::string name, int grade);
+        Bureaucrat(const std::string& name, int grade);
         Bureaucrat(const Bureaucrat& other);
         Bureaucrat& operator=(const Bureaucrat& other);
         ~Bureaucrat();
@@ -37,6 +37,6 @@ class Bureaucrat
         };
 };
 
-std::ostream& operator<<(std::ostream& s, Bureaucrat& b);
+std::ostream& operator<<(std::ostream& s, const Bureaucrat& b);
 
 #endif  /*BUREAUCRAT_HPP*/

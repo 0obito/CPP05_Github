@@ -4,7 +4,7 @@ Bureaucrat::Bureaucrat() : _name("NPC"), _grade(150) {
     // std::cout << "bureaucrat with default name: " << _name << " and with default grade: " << _grade << " was created." << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name) {
     if (grade < 1) {
         throw GradeTooHighException();
     }
@@ -15,10 +15,10 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
     // std::cout << "bureaucrat with name: " << _name << " and with grade " << _grade << " was created." << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(other._grade) {
+Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade) {
 }
 
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other) {
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
     if (this != &other) {
         this->_grade = other._grade;
     }
@@ -50,7 +50,7 @@ void Bureaucrat::decrementGrade() {
     _grade += 1;
 }
 
-std::ostream& operator<<(std::ostream& s, Bureaucrat& b) {
+std::ostream& operator<<(std::ostream& s, const Bureaucrat& b) {
     s << b.getName() << ", " << "bureaucrat grade " << b.getGrade() << ".";
     return s;
 }
