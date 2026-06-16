@@ -1,15 +1,11 @@
-# Options
 COMPILER = c++
 FLAGS    = -Wall -Wextra -Werror -std=c++98
+NAME  = maggots
 
-# Server
-NAME  = bureaucracy
-
-SRC     = Bureaucrat.cpp main.cpp
+SRC     = Bureaucrat.cpp Form.cpp main.cpp
 OBJ     = $(SRC:%.cpp=$(OBJ_dir)%.o)
 OBJ_dir = objs/
 
-# Rules
 all: $(NAME)
 
 $(NAME): $(OBJ)
@@ -29,6 +25,5 @@ fclean: clean
 
 re: fclean all
 
-# Special Targets:
 .PHONY: clean
 .SECONDARY: $(OBJ)
