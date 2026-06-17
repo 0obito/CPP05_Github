@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : _name("NPC"), _grade(150) {
     // std::cout << "bureaucrat with default name: " << _name << " and with default grade: " << _grade << " was created." << std::endl;
@@ -48,6 +49,16 @@ void Bureaucrat::decrementGrade() {
         throw GradeTooLowException();
     }
     _grade += 1;
+}
+
+void Bureaucrat::signForm(Form& f) {
+    try {
+        f.beSigned(*this);
+        std::cout << _name << " signed " << f.getName() << "." << std::endl;
+    }
+    catch (const std::exception& e) {
+        std::cout << _name << " couldn't sign " << f.getName() << " because " << e.what() << std::endl;
+    }
 }
 
 std::ostream& operator<<(std::ostream& s, const Bureaucrat& b) {

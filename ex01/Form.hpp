@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <sstream>
 
+class Bureaucrat;
+
 class Form {
     private:
         const std::string _name;
@@ -36,6 +38,8 @@ class Form {
         bool               getIsSigned()    const;
         int                getGradeToSign() const;
         int                getGradeToExec() const;
+
+        void beSigned(const Bureaucrat& bur);
 };
 
 std::ostream& operator<<(std::ostream& s, const Form& f);

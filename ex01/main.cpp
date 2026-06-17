@@ -1,64 +1,53 @@
+#include <iostream>
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-// A simple macro-like print for clean test separation
-void printTestHeader(const std::string& testName) {
-    std::cout << "\n--- [ TEST: " << testName << " ] ---\n";
+void printHeader(const std::string& text) {
+    std::cout << "\n--- [ " << text << " ] ---\n";
 }
 
 int main() {
-    
-    printTestHeader("1. Valid Form Creation & Getters");
+    printHeader("1. Form Initialization & Overloads");
     try {
-        Form taxForm("Tax_28B", 50, 20);
-        std::cout << "Name: " << taxForm.getName() << "\n";
-        std::cout << "Is Signed: " << (taxForm.getIsSigned() ? "Yes" : "No") << "\n";
-        std::cout << "Grade to Sign: " << taxForm.getGradeToSign() << "\n";
-        std::cout << "Grade to Execute: " << taxForm.getGradeToExec() << "\n";
+        Form a("Tax_28B", 50, 20);
+        Bureaucrat bob("Bob", 40);
         
-        // Testing the << operator overload
-        std::cout << taxForm << "\n"; 
+        std::cout << a << "\n";
+        std::cout << bob << "\n";
     } catch (const std::exception& e) {
-        std::cerr << "Unexpected Error: " << e.what() << "\n";
+        std::cerr << "Error: " << e.what() << "\n";
     }
 
-    printTestHeader("2. Invalid Form Creation (Grade to Sign Too High)");
+    printHeader("2. Bureaucrat Signs Form Successfully");
     try {
-        Form topSecret("Top_Secret", 0, 50); // Should throw
-        std::cout << topSecret << "\n"; // This line should never print
-    } catch (const Form::GradeTooHighException& e) {
+        Form b("NDA", 100, 50);
+        Bureaucrat alice("Alice", 99); // Grade 99 is better than 100
+        
+        alice.signForm(b);
+        std::cout << "Status Check -> " << b << "\n";
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << "\n";
+    }
+
+    printHeader("3. Bureaucrat Fails to Sign Form");
+    try {
+        Form c("Top_Secret", 10, 5);
+        Bureaucrat intern("Intern", 150); // Lowest grade
+        
+        intern.signForm(c);
+        std::cout << "Status Check -> " << c << "\n";
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << "\n";
+    }
+
+    printHeader("4. Form Invalid Instantiation");
+    try {
+        Form d("Impossible", 0, 50); // Should throw GradeTooHigh
+        std::cout << "You shouldn't see this.\n";
+    } catch (const std::exception& e) {
         std::cerr << "Caught successfully: " << e.what() << "\n";
-    } catch (const std::exception& e) {
-        std::cerr << "Generic catch: " << e.what() << "\n";
     }
 
-    printTestHeader("3. Invalid Form Creation (Grade to Execute Too Low)");
-    try {
-        Form trashForm("Trash_Log", 100, 151); // Should throw
-        std::cout << trashForm << "\n";
-    } catch (const Form::GradeTooLowException& e) {
-        std::cerr << "Caught successfully: " << e.what() << "\n";
-    } catch (const std::exception& e) {
-        std::cerr << "Generic catch: " << e.what() << "\n";
-    }
-
-    printTestHeader("4. Orthodox Canonical Form (Copies)");
-    try {
-        Form original("Original_Doc", 42, 42);
-
-        // Copy Constructor
-        Form copyConstructed(original);
-        std::cout << "Copy Constructed Form -> " << copyConstructed << "\n";
-
-        // Assignment Operator
-        Form assigned("Temp_Doc", 150, 150);
-        assigned = original; 
-        std::cout << "Assigned Form -> " << assigned << "\n";
-
-    } catch (const std::exception& e) {
-        std::cerr << "Error during copy tests: " << e.what() << "\n";
-    }
-
-    std::cout << "\n--- [ ALL TESTS COMPLETED ] ---\n";
+    std::cout << "\n--- [ END OF TESTS ] ---\n";
     return 0;
 }

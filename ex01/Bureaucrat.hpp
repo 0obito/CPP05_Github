@@ -5,8 +5,9 @@
 #include <stdexcept>
 #include <sstream>
 
-class Bureaucrat
-{
+class Form;
+
+class Bureaucrat {
     private:
         const std::string _name;
         int _grade;
@@ -23,6 +24,8 @@ class Bureaucrat
         void incrementGrade();
         void decrementGrade();
 
+        void signForm(Form& f);
+
         class GradeTooLowException  : public std::exception {
             public:
                 virtual const char* what() const throw() {
@@ -35,6 +38,7 @@ class Bureaucrat
                     return ("Bureaucrat grade is too high. (Highest possible grade is 1)");
                 }
         };
+
 };
 
 std::ostream& operator<<(std::ostream& s, const Bureaucrat& b);
