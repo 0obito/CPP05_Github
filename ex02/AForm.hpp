@@ -14,6 +14,9 @@ class AForm {
         const int         _gradeToSign;
         const int         _gradeToExec;
 
+    protected:
+        virtual void doItYourself (const Bureaucrat& executor) const = 0;
+
     public:
         AForm();
         AForm(const std::string& name, int gradeToSign, int gradeToExec);
@@ -21,25 +24,32 @@ class AForm {
         AForm& operator=(const AForm& other);
         ~AForm();
 
-        class GradeTooHighException : public std::exception {
+        class GradeTooHighException  : public std::exception {
             public:
                 virtual const char* what() const throw() {
-                    return ("AForm grade is too high. (Highest possible grade is 1)");
+                    return ("Bureaucrat grade is too high to sign this form.");
                 }
         };
-        class GradeTooLowException  : public std::exception {
+        class GradeTooLowException   : public std::exception {
             public:
                 virtual const char* what() const throw() {
-                    return ("AForm grade is too low. (Lowest possible grade is 150)");
+                    return ("Bureaucrat grade is too low to sign this form.");
                 }
         };
-
+        class FormNotSignedException : public std::exception {
+            public:
+                virtual const char* what() const throw() {
+                    return ("The form is not signed.");
+                }
+        };
         const std::string& getName()        const;
         bool               getIsSigned()    const;
         int                getGradeToSign() const;
         int                getGradeToExec() const;
 
         void beSigned(const Bureaucrat& bur);
+
+        void execute(const Bureaucrat& executor) const;
 };
 
 std::ostream& operator<<(std::ostream& s, const AForm& f);
