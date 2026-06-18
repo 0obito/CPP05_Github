@@ -58,7 +58,7 @@ void AForm::execute(const Bureaucrat& executor) const {
     if (executor.getGrade() > _gradeToExec) {
         throw GradeTooLowException();
     }
-    doItYourself(executor);
+    doItYourself();
 }
 
 std::ostream& operator<<(std::ostream& s, const AForm& f) {

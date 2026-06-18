@@ -8,7 +8,7 @@ class Bureaucrat;
 
 class PresidentialPardonForm : public AForm {
     private:
-        const std::string& _target;
+        std::string _target;
     public:
         PresidentialPardonForm();
         PresidentialPardonForm(const std::string& target);
@@ -16,7 +16,7 @@ class PresidentialPardonForm : public AForm {
         PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
         ~PresidentialPardonForm();
 
-        void doItYourself (const Bureaucrat& executor) const;
+        void doItYourself() const;
 };
 
 #endif /*PRESIDENTIALPARDONFORM_HPP*/

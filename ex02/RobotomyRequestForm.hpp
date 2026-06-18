@@ -2,21 +2,23 @@
 #define ROBOTOMYREQUESTFORM_HPP
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 class AForm;
 class Bureaucrat;
 
 class RobotomyRequestForm : public AForm {
     private:
-        const std::string& _target;
+        std::string _target;
     public:
         RobotomyRequestForm();
-        (const std::string& target);
-        (const & other);
-        & operator=(const & other);
-        ~();
+        RobotomyRequestForm(const std::string& target);
+        RobotomyRequestForm(const RobotomyRequestForm& other);
+        RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
+        ~RobotomyRequestForm();
 
-        void doItYourself (const Bureaucrat& executor) const;
+        void doItYourself() const;
 };
 
 #endif /*ROBOTOMYREQUESTFORM_HPP*/

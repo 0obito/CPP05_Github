@@ -15,7 +15,7 @@ class AForm {
         const int         _gradeToExec;
 
     protected:
-        virtual void doItYourself (const Bureaucrat& executor) const = 0;
+        virtual void doItYourself() const = 0;
 
     public:
         AForm();

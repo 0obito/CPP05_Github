@@ -1,6 +1,6 @@
 COMPILER = c++
 FLAGS    = -Wall -Wextra -Werror -std=c++98
-NAME     = maynForms
+NAME     = manyForms
 
 SRC     = Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp main.cpp
 OBJ     = $(SRC:%.cpp=$(OBJ_dir)%.o)

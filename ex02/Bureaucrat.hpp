@@ -38,7 +38,7 @@ class Bureaucrat {
                     return ("Bureaucrat grade is too high. (Highest possible grade is 1)");
                 }
         };
-
+        void executeForm(const AForm& f) const;
 };
 
 std::ostream& operator<<(std::ostream& s, const Bureaucrat& b);

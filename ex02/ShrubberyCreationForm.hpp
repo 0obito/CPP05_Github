@@ -2,13 +2,14 @@
 #define SHRUBBERYCREATIONFORM_HPP
 
 #include <iostream>
+#include <fstream>
 
 class AForm;
 class Bureaucrat;
 
 class ShrubberyCreationForm : public AForm {
     private:
-        const std::string& _target;
+        std::string _target;
     public:
         ShrubberyCreationForm();
         ShrubberyCreationForm(const std::string& target);
@@ -16,7 +17,7 @@ class ShrubberyCreationForm : public AForm {
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
         ~ShrubberyCreationForm();
 
-        void doItYourself (const Bureaucrat& executor) const;
+        void doItYourself() const;
 };
 
 #endif /*SHRUBBERYCREATIONFORM_HPP*/
