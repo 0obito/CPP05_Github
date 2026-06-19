@@ -16,7 +16,8 @@ class PresidentialPardonForm : public AForm {
         PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
         ~PresidentialPardonForm();
 
-        void doItYourself() const;
+        void performExecution() const;
 };
 
 #endif /*PRESIDENTIALPARDONFORM_HPP*/
+ 

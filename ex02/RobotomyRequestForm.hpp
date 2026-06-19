@@ -18,7 +18,7 @@ class RobotomyRequestForm : public AForm {
         RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
         ~RobotomyRequestForm();
 
-        void doItYourself() const;
+        void performExecution() const;
 };
 
 #endif /*ROBOTOMYREQUESTFORM_HPP*/

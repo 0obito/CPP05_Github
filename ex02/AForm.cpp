@@ -53,12 +53,15 @@ void AForm::beSigned(const Bureaucrat& bur) {
 
 void AForm::execute(const Bureaucrat& executor) const {
     if (_isSigned == false) {
+        std::cerr << "Error: " << executor.getName() << " couldn't execute the form " << _name << ".\n";
         throw FormNotSignedException();
     }
     if (executor.getGrade() > _gradeToExec) {
+        std::cerr << "Error: " << executor.getName() << " couldn't execute the form " << _name << ".\n";
         throw GradeTooLowException();
     }
-    doItYourself();
+    performExecution();
+    std::cout << executor.getName() << " executed the form " << _name << ".\n";
 }
 
 std::ostream& operator<<(std::ostream& s, const AForm& f) {

@@ -65,10 +65,5 @@ std::ostream& operator<<(std::ostream& s, const Bureaucrat& b) {
 }
 
 void Bureaucrat::executeForm(const AForm& f) const {
-    try {
-        f.execute(*this);
-    }
-    catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
+    f.execute(*this);
 }

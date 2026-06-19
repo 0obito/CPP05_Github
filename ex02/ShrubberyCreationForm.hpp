@@ -17,7 +17,7 @@ class ShrubberyCreationForm : public AForm {
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
         ~ShrubberyCreationForm();
 
-        void doItYourself() const;
+        void performExecution() const;
 };
 
 #endif /*SHRUBBERYCREATIONFORM_HPP*/
