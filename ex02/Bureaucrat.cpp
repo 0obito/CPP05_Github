@@ -65,5 +65,16 @@ std::ostream& operator<<(std::ostream& s, const Bureaucrat& b) {
 }
 
 void Bureaucrat::executeForm(const AForm& f) const {
-    f.execute(*this);
+    try {
+        f.execute(*this);
+        std::cout << _name << " executed the form " << f.getName() << "\n";
+    }
+    catch (const AForm::FormNotSignedException& notSigned) {
+        std::cerr << notSigned.what() << "\n";
+        std::cerr << "Error: " << _name << " couldn't execute the form " << f.getName() << "\n";
+    }
+    catch (const AForm::GradeTooLowException& lowGrade) {
+        std::cerr << lowGrade.what() << "\n";
+        std::cerr << "Error: " << _name << " couldn't execute the form " << f.getName() << "\n";
+    }
 }
