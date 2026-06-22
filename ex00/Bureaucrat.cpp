@@ -1,7 +1,6 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat() : _name("NPC"), _grade(150) {
-    // std::cout << "bureaucrat with default name: " << _name << " and with default grade: " << _grade << " was created." << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name) {
@@ -12,15 +11,14 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name) {
         throw GradeTooLowException();
     }
     _grade = grade;
-    // std::cout << "bureaucrat with name: " << _name << " and with grade " << _grade << " was created." << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name), _grade(other._grade) {
+Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade) {
 }
 
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other) {
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
     if (this != &other) {
-        this->_grade = other._grade;
+        _grade = other._grade;
     }
     return (*this);
 }
