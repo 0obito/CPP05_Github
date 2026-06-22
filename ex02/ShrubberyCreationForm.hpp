@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <fstream>
+#include "AForm.hpp"
 
-class AForm;
 class Bureaucrat;
 
 class ShrubberyCreationForm : public AForm {

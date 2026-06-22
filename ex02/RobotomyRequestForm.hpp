@@ -4,8 +4,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include "AForm.hpp"
 
-class AForm;
 class Bureaucrat;
 
 class RobotomyRequestForm : public AForm {

@@ -1,5 +1,4 @@
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -53,10 +52,8 @@ int main() {
         PresidentialPardonForm unsignedForm("Nobody");
 
         eagerGuy.executeForm(unsignedForm);
-        
-        std::cout << "You shouldn't see this.\n";
     } catch (const std::exception& e) {
-        std::cerr << "Caught successfully: " << e.what() << "\n";
+        std::cout << "I shouldn't see this.\n";
     }
 
     printHeader("4. The 'Grade Too Low To Execute' Error");
@@ -67,9 +64,8 @@ int main() {
         midManager.signForm(sneakyShrub);
         midManager.executeForm(sneakyShrub);
 
-        std::cout << "You shouldn't see this.\n";
     } catch (const std::exception& e) {
-        std::cerr << "Caught successfully: " << e.what() << "\n";
+        std::cout << "I shouldn't see this.\n";
     }
 
     std::cout << "\n--- [ ALL TESTS COMPLETED ] ---\n";
