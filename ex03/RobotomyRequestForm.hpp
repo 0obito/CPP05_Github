@@ -6,8 +6,6 @@
 #include <ctime>
 #include "AForm.hpp"
 
-class Bureaucrat;
-
 class RobotomyRequestForm : public AForm {
     private:
         std::string _target;

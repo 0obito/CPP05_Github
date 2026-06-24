@@ -27,19 +27,19 @@ class AForm {
         class GradeTooHighException  : public std::exception {
             public:
                 virtual const char* what() const throw() {
-                    return ("Grade is too high.");
+                    return ("Grade is too high");
                 }
         };
         class GradeTooLowException   : public std::exception {
             public:
                 virtual const char* what() const throw() {
-                    return ("Grade is too low.");
+                    return ("Grade is too low");
                 }
         };
         class FormNotSignedException : public std::exception {
             public:
                 virtual const char* what() const throw() {
-                    return ("Attempted to execute a form that was not signed.");
+                    return ("Form not signed");
                 }
         };
         const std::string& getName()        const;

@@ -27,11 +27,11 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
 Bureaucrat::~Bureaucrat() {
 }
 
-const std::string& Bureaucrat::getName(void) const {
+const std::string& Bureaucrat::getName() const {
     return _name;
 }
 
-int Bureaucrat::getGrade(void) const {
+int Bureaucrat::getGrade() const {
     return _grade;
 }
 
@@ -52,7 +52,7 @@ void Bureaucrat::decrementGrade() {
 void Bureaucrat::signForm(AForm& f) {
     try {
         f.beSigned(*this);
-        std::cout << _name << " signed " << f.getName() << ".\n";
+        std::cout << _name << " signed " << f.getName() << "\n";
     }
     catch (const std::exception& e) {
         std::cerr << _name << " couldn't sign " << f.getName() << " because " << e.what() << "\n";
@@ -60,7 +60,7 @@ void Bureaucrat::signForm(AForm& f) {
 }
 
 std::ostream& operator<<(std::ostream& s, const Bureaucrat& b) {
-    s << b.getName() << ", " << "bureaucrat grade " << b.getGrade() << ".";
+    s << b.getName() << ", bureaucrat grade " << b.getGrade();
     return s;
 }
 
@@ -70,11 +70,11 @@ void Bureaucrat::executeForm(const AForm& f) const {
         std::cout << _name << " executed the form " << f.getName() << "\n";
     }
     catch (const AForm::FormNotSignedException& notSigned) {
+        std::cerr << "Error: " << _name << " couldn't execute the form " << f.getName() << ". reason: ";
         std::cerr << notSigned.what() << "\n";
-        std::cerr << "Error: " << _name << " couldn't execute the form " << f.getName() << "\n";
     }
-    catch (const AForm::GradeTooLowException& lowGrade) {
+    catch (const Bureaucrat::GradeTooLowException& lowGrade) {
+        std::cerr << "Error: " << _name << " couldn't execute the form " << f.getName() << ". reason: ";
         std::cerr << lowGrade.what() << "\n";
-        std::cerr << "Error: " << _name << " couldn't execute the form " << f.getName() << "\n";
     }
 }

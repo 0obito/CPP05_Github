@@ -1,9 +1,8 @@
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
 #include "Bureaucrat.hpp"
 #include "Intern.hpp"
 #include "AForm.hpp"
+#include <cstdlib>
+#include <ctime>
 
 void printHeader(const std::string& text) {
     std::cout << "\n========================================\n";
@@ -12,44 +11,49 @@ void printHeader(const std::string& text) {
 }
 
 int main() {
-    // Seed the RNG once for the Robotomy form
     srand(time(0));
 
     Intern someRandomIntern;
-    Bureaucrat boss("The_CEO", 1);
-    AForm* rrf;
+    Bureaucrat boss("The_Boss", 1);
+    AForm* formPtr;
 
-    printHeader("Test 1: The Non-Existent Form");
-    // Should print an error and return NULL
-    rrf = someRandomIntern.makeForm("some fake form", "Ghost");
-    if (rrf == 0) {
-        std::cout << "-> Successfully caught invalid form generation!\n";
+    // 1
+    printHeader("Test 1: Intern attempts to create an unknown form. Fails gracefully");
+    formPtr = someRandomIntern.makeForm("some fake form", "Ghost");
+    if (formPtr == 0) {
+        std::cout << "-> Intern correctly returned a NULL pointer for an unknown form.\n";
     }
 
-    printHeader("Test 2: Shrubbery Creation Form");
-    rrf = someRandomIntern.makeForm("shrubbery creation", "Backyard");
-    if (rrf) {
-        boss.signForm(*rrf);
-        boss.executeForm(*rrf);
-        delete rrf; // CRITICAL: The Intern used 'new', so we must 'delete'
+    // 2
+    printHeader("Test 2: Intern creates a ShrubberyCreationForm");
+    formPtr = someRandomIntern.makeForm("shrubbery creation", "Backyard");
+    if (formPtr) {
+        std::cout << *formPtr << "\n";
+        boss.signForm(*formPtr);
+        boss.executeForm(*formPtr);
+        delete formPtr; // CRITICAL: Freeing the heap memory allocated by Intern
     }
 
-    printHeader("Test 3: Robotomy Request Form");
-    rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-    if (rrf) {
-        boss.signForm(*rrf);
-        boss.executeForm(*rrf);
-        delete rrf;
+    // 3
+    printHeader("Test 3: Intern creates a RobotomyRequestForm");
+    formPtr = someRandomIntern.makeForm("robotomy request", "Bender");
+    if (formPtr) {
+        std::cout << *formPtr << "\n";
+        boss.signForm(*formPtr);
+        boss.executeForm(*formPtr);
+        delete formPtr;
     }
 
-    printHeader("Test 4: Presidential Pardon Form");
-    rrf = someRandomIntern.makeForm("presidential pardon", "Arthur_Dent");
-    if (rrf) {
-        boss.signForm(*rrf);
-        boss.executeForm(*rrf);
-        delete rrf; 
+    // 4
+    printHeader("Test 4: Intern creates a PresidentialPardonForm");
+    formPtr = someRandomIntern.makeForm("presidential pardon", "Arthur_Dent");
+    if (formPtr) {
+        std::cout << *formPtr << "\n";
+        boss.signForm(*formPtr);
+        boss.executeForm(*formPtr);
+        delete formPtr; 
     }
 
-    printHeader("All Memory Cleaned. Tests Complete.");
+    printHeader("End of program");
     return 0;
 }

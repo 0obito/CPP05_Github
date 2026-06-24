@@ -46,11 +46,11 @@ AForm* Intern::makeForm(const std::string &name, const std::string &target) cons
 
     for (int i = 0 ; i < 3 ; i++) {
         if (formNames[i] == name) {
-            std::cout << "Intern creates " << name << ".\n";
+            std::cout << "Intern creates " << name << "\n";
             return (this->*formFuncs[i])(target);
         }
     }
 
-    std::cerr << "Intern couldn't create " << name << ". No such form!"<< std::endl;
+    std::cerr << "Intern couldn't create " << name << ". No such form!\n";
     return (0);
 }
