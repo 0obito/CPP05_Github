@@ -2,72 +2,103 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include <cstdlib>
+#include <ctime>
 
 void printHeader(const std::string& text) {
-    std::cout << "\n--- [ " << text << " ] ---\n";
+    std::cout << "\n========================================\n";
+    std::cout << "  " << text << "\n";
+    std::cout << "========================================\n";
 }
 
 int main() {
     srand(time(0));
 
-    printHeader("1. Initialization & Valid Executions");
+    // 1
+    printHeader("Test 1: ShrubberyCreationForm - Sign and Execute");
     try {
-        Bureaucrat boss("The_Boss", 1);
-        
-        ShrubberyCreationForm shrub("Backyard");
+        Bureaucrat gardener("Gardener", 130);
+        ShrubberyCreationForm shrub("Home");
+
+        std::cout << gardener << "\n";
+        std::cout << shrub << "\n";
+
+        gardener.signForm(shrub);
+        gardener.executeForm(shrub);
+
+        std::cout << "-> Check directory for 'Home_shrubbery'!\n";
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Caught exception: " << e.what() << "\n";
+    }
+
+    // 2
+    printHeader("Test 2: RobotomyRequestForm - 50/50 Chance");
+    try {
+        Bureaucrat scientist("Dr. Frankenstein", 40);
         RobotomyRequestForm robot("Bender");
+
+        std::cout << scientist << "\n";
+        std::cout << robot << "\n";
+
+        scientist.signForm(robot);
+
+        for (int i = 0; i < 4; i++) {
+            std::cout << "\nAttempt " << i + 1 << ":\n";
+            scientist.executeForm(robot);
+        }
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Caught exception: " << e.what() << "\n";
+    }
+
+    // 3
+    printHeader("Test 3: PresidentialPardonForm - Sign and Execute");
+    try {
+        Bureaucrat president("Zaphod", 5);
         PresidentialPardonForm pardon("Arthur_Dent");
 
-        boss.signForm(shrub);
-        boss.signForm(robot);
-        boss.signForm(pardon);
+        std::cout << president << "\n";
+        std::cout << pardon << "\n";
 
-        boss.executeForm(shrub);
-        boss.executeForm(robot);
-        boss.executeForm(pardon);
-
-        std::cout << "\nCheck your directory for 'Backyard_shrubbery'!\n";
-
-    } catch (const std::exception& e) {
-        std::cerr << "Unexpected Error: " << e.what() << "\n";
+        president.signForm(pardon);
+        president.executeForm(pardon);
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Caught exception: " << e.what() << "\n";
     }
 
-    printHeader("2. The Robotomy 50/50 Gauntlet");
+    // 4
+    printHeader("Test 4: Attempt to execute an unsigned form");
     try {
-        Bureaucrat scientist("Dr_Frankenstein", 10);
-        RobotomyRequestForm testSubject("Monster");
+        Bureaucrat boss("Boss", 1);
+        RobotomyRequestForm unsignedForm("Nobody");
 
-        scientist.signForm(testSubject);
-        
-        for (int i = 0; i < 5; i++) {
-            scientist.executeForm(testSubject);
-        }
-    } catch (const std::exception& e) {
-        std::cerr << "Unexpected Error: " << e.what() << "\n";
+        // Boss has the grade, form isn't signed 
+        boss.executeForm(unsignedForm);
+        // Bureaucrat catches the exception internally
+    }
+    catch (const std::exception& e) {
+        // shouldn't come here
+        std::cerr << "Caught exception: " << e.what() << "\n";
     }
 
-    printHeader("3. The Unsigned Form Execution Error");
+    // 5
+    printHeader("Test 5: Attempt to execute with grade too low");
     try {
-        Bureaucrat eagerGuy("Eager", 1);
-        PresidentialPardonForm unsignedForm("Nobody");
-
-        eagerGuy.executeForm(unsignedForm);
-    } catch (const std::exception& e) {
-        std::cout << "I shouldn't see this.\n";
-    }
-
-    printHeader("4. The 'Grade Too Low To Execute' Error");
-    try {
-        Bureaucrat midManager("Manager", 140);
+        Bureaucrat flan("Flan", 140); 
         ShrubberyCreationForm sneakyShrub("Secret_Garden");
 
-        midManager.signForm(sneakyShrub);
-        midManager.executeForm(sneakyShrub);
-
-    } catch (const std::exception& e) {
-        std::cout << "I shouldn't see this.\n";
+        // flan can sign, can't execute
+        flan.signForm(sneakyShrub);
+        // Bureaucrat catches this internally
+        flan.executeForm(sneakyShrub);
+    }
+    catch (const std::exception& e) {
+        // shouldn't come here
+        std::cerr << "Caught exception: " << e.what() << "\n";
     }
 
-    std::cout << "\n--- [ ALL TESTS COMPLETED ] ---\n";
+    printHeader("End of program");
     return 0;
 }

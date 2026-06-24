@@ -5,8 +5,6 @@
 #include <fstream>
 #include "AForm.hpp"
 
-class Bureaucrat;
-
 class ShrubberyCreationForm : public AForm {
     private:
         std::string _target;

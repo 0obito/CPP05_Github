@@ -4,8 +4,6 @@
 #include <iostream>
 #include "AForm.hpp"
 
-class Bureaucrat;
-
 class PresidentialPardonForm : public AForm {
     private:
         std::string _target;

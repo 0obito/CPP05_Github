@@ -26,4 +26,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean
-.SECONDARY: $(OBJ)
+.SECONDARY: $(OBJ) $(OBJ_dir)
