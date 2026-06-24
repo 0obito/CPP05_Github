@@ -47,17 +47,17 @@ void Form::beSigned(const Bureaucrat& bur) {
         _isSigned = true;
     }
     else {
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
     }
 }
 
 std::ostream& operator<<(std::ostream& s, const Form& f) {
     s << f.getName() << ", required grade to sign " << f.getGradeToSign() << ", required grade to execute " << f.getGradeToExec();
     if (f.getIsSigned()) {
-        s << ", is signed.";
+        s << ", is signed";
     }
     else {
-        s << ", is not signed.";
+        s << ", is not signed";
     }
     return s;
 }

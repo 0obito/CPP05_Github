@@ -1,6 +1,6 @@
 COMPILER = c++
 FLAGS    = -Wall -Wextra -Werror -std=c++98
-NAME  = maggots
+NAME  = form
 
 SRC     = Bureaucrat.cpp Form.cpp main.cpp
 OBJ     = $(SRC:%.cpp=$(OBJ_dir)%.o)
@@ -26,4 +26,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean
-.SECONDARY: $(OBJ)
+.SECONDARY: $(OBJ) $(OBJ_dir)
