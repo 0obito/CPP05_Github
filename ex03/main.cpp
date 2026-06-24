@@ -31,7 +31,7 @@ int main() {
         std::cout << *formPtr << "\n";
         boss.signForm(*formPtr);
         boss.executeForm(*formPtr);
-        delete formPtr; // CRITICAL: Freeing the heap memory allocated by Intern
+        delete formPtr;
     }
 
     // 3
@@ -51,7 +51,7 @@ int main() {
         std::cout << *formPtr << "\n";
         boss.signForm(*formPtr);
         boss.executeForm(*formPtr);
-        delete formPtr; 
+        delete formPtr;
     }
 
     printHeader("End of program");
